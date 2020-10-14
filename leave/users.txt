@@ -1,0 +1,17 @@
+username: "2019111111"
+password: "11111111"
+phone: "19999999999"
+position: "实验室"
+reason: "科研"
+school: "西土城"
+teacher_uid: 000
+teacher_name: "xxx"
+---
+username: "2019111111"
+password: "11111111"
+phone: "19999999999"
+position: "实验室"
+reason: "科研"
+school: "西土城"
+teacher_uid: 000
+teacher_name: "xxx"
