@@ -4,6 +4,7 @@ import requests
 import datetime
 import re
 import yaml
+import os
 
 session = requests.Session()
 schools = {
@@ -111,7 +112,7 @@ def leave(
 
 
 if __name__ == "__main__":
-    with open("./users.txt") as f:
+    with open(os.path.join(os.path.dirname(__file__), "users.txt")) as f:
         users = yaml.load_all(f, Loader=yaml.FullLoader)
         for u in users:
             try:

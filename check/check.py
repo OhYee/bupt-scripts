@@ -2,6 +2,7 @@ import requests
 import datetime
 import re
 import json
+import os
 
 session = requests.Session()
 
@@ -64,7 +65,7 @@ def check(username: str, password: str):
 
 
 if __name__ == "__main__":
-    with open("./users.txt") as f:
+    with open(os.path.join(os.path.dirname(__file__), "users.txt")) as f:
         users = f.read().split("\n")
     for u in users:
         try:
