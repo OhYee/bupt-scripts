@@ -109,7 +109,6 @@ def leave(
         }
     )
     resp.encoding = "utf-8"
-    print(resp.status_code, resp.request.body, resp.json())
 
 
 if __name__ == "__main__":
