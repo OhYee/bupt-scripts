@@ -129,4 +129,4 @@ if __name__ == "__main__":
                     }
                 )
             except Exception as e:
-                print(e.with_traceback())
+                print(e.print_exc())
