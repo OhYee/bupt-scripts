@@ -43,7 +43,7 @@ def login(username: str, password: str):
 
 def getCollege():
     resp = session.get("https://service.bupt.edu.cn/site/user/get-name")
-    return resp.json()["college"]
+    return resp.json()["d"]["college"]
 
 
 def leave(
