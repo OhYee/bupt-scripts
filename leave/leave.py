@@ -14,6 +14,7 @@ schools = {
 
 
 def login(username: str, password: str):
+    session.cookies.clear()
     resp = session.get("https://auth.bupt.edu.cn/authserver/login")
     matchLT = re.findall(
         r'<input type="hidden" name="lt" value="(.*)" />', resp.text)
