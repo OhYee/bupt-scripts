@@ -91,6 +91,7 @@ def leave(
                     "SelectV2_58": [schools[school]],
                     "MultiInput_30": reason,
                     "UserSearch_60": teacher,
+                    "UserSearch_73": teacher,
                 }
             }
         }
@@ -109,6 +110,7 @@ def leave(
         }
     )
     resp.encoding = "utf-8"
+    print(resp.text)
 
 
 if __name__ == "__main__":
@@ -125,7 +127,8 @@ if __name__ == "__main__":
                     school=u.get("school", "西土城"),
                     teacher={
                         "uid": u.get("teacher_uid", 0),
-                        "name": u.get("teacher_name", "")
+                        "name": u.get("teacher_name", ""),
+                        "number": u.get("teacher_name", "")
                     }
                 )
             except Exception as e:

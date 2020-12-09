@@ -6,6 +6,7 @@ reason: "科研"
 school: "西土城"
 teacher_uid: 000
 teacher_name: "xxx"
+teacher_number: "1234"
 ---
 username: "2019111111"
 password: "11111111"
@@ -15,3 +16,4 @@ reason: "科研"
 school: "西土城"
 teacher_uid: 000
 teacher_name: "xxx"
+teacher_number: "1234"
