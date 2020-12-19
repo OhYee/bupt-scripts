@@ -48,6 +48,11 @@ def check(username: str, password: str):
         return
     oldInfo = json.loads(matchOld[0])
 
+    realnames = re.findall(r'realname: "(.*)",', resp.text)
+    realname = "获取名称失败"
+    if len(realnames) > 0:
+        realname = realnames[0]
+
     data = {}
     for k in oldInfo:
         data[k] = oldInfo.get(k, "")
@@ -59,9 +64,9 @@ def check(username: str, password: str):
 
     j = resp.json()
     if j.get("e", 1) == 0:
-        print("填报成功")
+        print(realname, "填报成功", oldInfo.get("address", ""))
     else:
-        print("填报失败", j.get("m", ""))
+        print(realname, "填报失败", j.get("m", ""))
 
 
 if __name__ == "__main__":
