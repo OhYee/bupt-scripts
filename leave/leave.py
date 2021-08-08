@@ -76,6 +76,10 @@ def leave(
             "node_id": "",
             "form_data": {
                 "1716": {
+                    "Alert_67": "",
+                    "Count_74": {"type":0, "value":1},
+                    "Input_28": "1",
+                    "Valudate_66": "",
                     "User_5": name,
                     "User_7": username,
                     "User_9": college,
@@ -85,13 +89,18 @@ def leave(
                         "value": "1",
                         "name": "本人已阅读并承诺",
                     },
+                    "Radio_73": {
+                        "value": "1",
+                        "name": "是",
+                    },
                     "Calendar_47": endTime,
                     "Calendar_50": beginTime,
                     "Calendar_62": date,
+                    "Calendar_69": date,
                     "SelectV2_58": [schools[school]],
                     "MultiInput_30": reason,
                     "UserSearch_60": teacher,
-                    "UserSearch_73": teacher,
+                    #"UserSearch_73": teacher,
                 }
             }
         }
