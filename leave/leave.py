@@ -137,7 +137,7 @@ if __name__ == "__main__":
                     teacher={
                         "uid": u.get("teacher_uid", 0),
                         "name": u.get("teacher_name", ""),
-                        "number": u.get("teacher_name", "")
+                        "number": u.get("teacher_number", "")
                     }
                 )
             except Exception as e:
