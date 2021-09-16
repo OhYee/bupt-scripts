@@ -69,7 +69,7 @@ def leave(
         hour=0, minute=0, second=0,
         microsecond=0
     ).isoformat(timespec="microseconds")[:-7] + "+08:00"
-    print(f"date={date}")
+    
     beginTime = datetime.datetime.utcnow().replace(
         microsecond=0).isoformat(timespec="seconds") + ".000Z"
     endTime = datetime.datetime.now().replace(hour=23, minute=59, second=59, microsecond=0).astimezone(
