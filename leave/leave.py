@@ -8,7 +8,7 @@ import os
 
 session = requests.Session()
 schools = {
-    "沙河":   {"name": "沙河校区", "value": "1", "default": 0, "imgdata": ""},
+    "沙河": {"name": "沙河校区", "value": "1", "default": 0, "imgdata": ""},
     "西土城": {"name": "西土城校区", "value": "2", "default": 0, "imgdata": ""},
 }
 
@@ -23,14 +23,16 @@ def login(username: str, password: str):
         return ""
     lt = matchLT[0]
 
-    resp = session.post("https://auth.bupt.edu.cn/authserver/login?service=https%3A%2F%2Fme.bupt.edu.cn%2Fsite%2Flogin%2Fcas-login", data={
-        "username": username,
-        "password": password,
-        "lt": lt,
-        "execution": "e1s1",
-        "_eventId": "submit",
-        "rmShown": 1,
-    })
+    resp = session.post(
+        "https://auth.bupt.edu.cn/authserver/login?service=https%3A%2F%2Fme.bupt.edu.cn%2Fsite%2Flogin%2Fcas-login",
+        data={
+            "username": username,
+            "password": password,
+            "lt": lt,
+            "execution": "e1s1",
+            "_eventId": "submit",
+            "rmShown": 1,
+        })
 
     matchUserInfo = re.findall(
         r'<div class="login_info">\s*<span>\s*([^\s]*)\s*</span>\s*<a href=".*" title="退出登录">',
@@ -63,8 +65,11 @@ def leave(
 
     college = getCollege()
 
-    date = datetime.datetime.now().replace(hour=0, minute=0, second=0,
-                                           microsecond=0).isoformat(timespec="microseconds")[:-7]+"+08:00"
+    date = datetime.datetime.now().replace(
+        hour=0, minute=0, second=0,
+        microsecond=0
+    ).isoformat(timespec="microseconds")[:-7] + "+08:00"
+    print(f"date={date}")
     beginTime = datetime.datetime.utcnow().replace(
         microsecond=0).isoformat(timespec="seconds") + ".000Z"
     endTime = datetime.datetime.now().replace(hour=23, minute=59, second=59, microsecond=0).astimezone(
@@ -77,9 +82,8 @@ def leave(
             "form_data": {
                 "1716": {
                     "Alert_67": "",
-                    "Count_74": {"type":0, "value":1},
-                    "Input_28": "1",
-                    "Valudate_66": "",
+                    "Count_74": {"type": 0, "value": 1},  # unused
+                    "Valudate_66": "",  # unused
                     "User_5": name,
                     "User_7": username,
                     "User_9": college,
@@ -96,11 +100,16 @@ def leave(
                     "Calendar_47": endTime,
                     "Calendar_50": beginTime,
                     "Calendar_62": date,
-                    "Calendar_69": date,
+                    "Calendar_69": date,  # unused
                     "SelectV2_58": [schools[school]],
                     "MultiInput_30": reason,
                     "UserSearch_60": teacher,
-                    #"UserSearch_73": teacher,
+                    "UserSearch_73": teacher,  # unused
+                    "Validate_63": "",
+                    "Alert_65": "",
+                    "Validate_66": "",
+                    "Variate_74": "否",
+                    "DataSource_75": ""
                 }
             }
         }
@@ -108,8 +117,8 @@ def leave(
 
     resp = session.post(
         "https://service.bupt.edu.cn/site/apps/launch",
-        data="data=" +
-        parse.quote(str(data["data"]).replace("'", '"').replace(" ", "")),
+        data="data=" + parse.quote(str(data["data"]).replace(
+            "'", '"').replace(" ", "")),
         headers={
             "Content-Type": "application/x-www-form-urlencoded",
             "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36 Edg/86.0.622.38",
@@ -137,7 +146,7 @@ if __name__ == "__main__":
                     teacher={
                         "uid": u.get("teacher_uid", 0),
                         "name": u.get("teacher_name", ""),
-                        "number": u.get("teacher_name", "")
+                        "number": u.get("teacher_number", "")
                     }
                 )
             except Exception as e:
