@@ -65,15 +65,25 @@ def leave(
 
     college = getCollege()
 
-    date = datetime.datetime.now().replace(
+    tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
+
+    date = tomorrow.replace(
         hour=0, minute=0, second=0,
         microsecond=0
     ).isoformat(timespec="microseconds")[:-7] + "+08:00"
+
+    beginTime = tomorrow.replace(
+        hour=7, minute=0, second=0, microsecond=0
+    ).astimezone(
+        tz=datetime.timezone.utc
+    ).isoformat(timespec="microseconds").replace("000+00:00", "Z")
+    endTime = tomorrow.replace(
+        hour=23, minute=59, second=59, microsecond=0
+    ).astimezone(
+        tz=datetime.timezone.utc
+    ).isoformat(timespec="microseconds").replace("000+00:00", "Z")
+
     
-    beginTime = datetime.datetime.utcnow().replace(
-        microsecond=0).isoformat(timespec="seconds") + ".000Z"
-    endTime = datetime.datetime.now().replace(hour=23, minute=59, second=59, microsecond=0).astimezone(
-        tz=datetime.timezone.utc).isoformat(timespec="microseconds").replace("000+00:00", "Z")
 
     data = {
         "data": {
@@ -108,10 +118,20 @@ def leave(
                     "Validate_63": "",
                     "Alert_65": "",
                     "Validate_66": "",
-                    "Variate_74": "否",
-                    "DataSource_75": ""
+                    "Variate_74": "否",  # unused
+                    "DataSource_75": ""  # unused
                 }
-            }
+            },
+            "userview": 1,
+            "special_approver": [
+                {
+                    "node_key": "UserTask_100lwr4",
+                    "uids": [
+                        teacher.get("uid", "")
+                    ],
+                    "subprocessIndex": ""
+                }
+            ]
         }
     }
 
