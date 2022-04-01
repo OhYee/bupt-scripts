@@ -16,17 +16,32 @@ defaultKeys = [
 
 
 def login(username: str, password: str):
-    resp = session.post("https://app.bupt.edu.cn/uc/wap/login/check", data={
+    resp = session.get("https://auth.bupt.edu.cn/authserver/login", data={
         "username": username,
         "password": password,
     })
 
+    result =re.findall( r'<input name="execution" value="([a-zA-Z0-9\-=+/_]+)"/>', resp.text)
+    if len(result) > 0:
+        execution = result[0]
+    else:
+        execution = ""
+
+    resp = session.post("https://auth.bupt.edu.cn/authserver/login", data={
+        "username": username,
+        "password": password,
+        "submit": "登录",
+        "type": "username_password",
+        "execution": execution,
+        "_eventId": "submit",
+    })
+     
+    return True
     if resp.json()["e"] == 0:
         return True
     else:
         print(resp.text)
         return False
-
 
 def check(username: str, password: str):
     if login(username, password):
