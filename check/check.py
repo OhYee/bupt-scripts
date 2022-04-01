@@ -4,7 +4,6 @@ import re
 import json
 import os
 
-session = requests.Session()
 
 oldKeys = [
     "ismoved",    "jhfjrq", "jhfjjtgj", "jhfjhbcc", "sfxk", "xkqq", "szgj", "szcs", "zgfxdq", "mjry", "csmjry", "uid",  "tw", "sfcxtz", "sfyyjc", "jcjgqr", "jcjg", "sfjcbh", "sfcxzysx", "qksm", "remark", "address", "area", "province", "city", "geo_api_info",  "sfzx", "sfjcwhry", "sfcyglq", "gllx",
@@ -15,7 +14,7 @@ defaultKeys = [
 ]
 
 
-def login(username: str, password: str):
+def login(session, username: str, password: str):
     resp = session.get("https://auth.bupt.edu.cn/authserver/login", data={
         "username": username,
         "password": password,
@@ -44,7 +43,9 @@ def login(username: str, password: str):
         return False
 
 def check(username: str, password: str):
-    if login(username, password):
+    session = requests.Session()
+    
+    if login(session, username, password):
         print(username, "登录成功")
     else:
         print(username, "登录失败")
