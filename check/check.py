@@ -3,6 +3,8 @@ import datetime
 import re
 import json
 import os
+import time
+import random
 
 
 oldKeys = [
@@ -86,12 +88,17 @@ def check(username: str, password: str):
 
 
 if __name__ == "__main__":
+    random.seed(time.time())
     with open(os.path.join(os.path.dirname(__file__), "users.txt")) as f:
         users = f.read().split("\n")
+        random.shuffle(users)
     for u in users:
+        sleepTime = random.randint(10,30)
+        time.sleep(sleepTime)
         try:
             if u != "":
                 username, password = u.split(" ")
+                print(username+' sleep time:'+str(sleepTime))
                 check(username, password)
         except Exception as e:
             print(e)
